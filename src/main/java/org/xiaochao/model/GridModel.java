@@ -1,10 +1,23 @@
 package org.xiaochao.model;
 
+import cn.hutool.setting.Setting;
+import cn.hutool.setting.SettingUtil;
+
 /**
  * @Author jiang_ruixin
  * @Date 2019/6/25 20:35
  **/
 public class GridModel {
+    private static final int BUY_NUM;
+    private static final double MAX_PROFIT_RUN_PRICE;
+    private static final double MAX_PROFIT_RUN_PERCENT;
+
+    static {
+        Setting setting = SettingUtil.get("grid.properties");
+        BUY_NUM = setting.getInt("buy_num");
+        MAX_PROFIT_RUN_PRICE = setting.getDouble("max_profit_run_price");
+        MAX_PROFIT_RUN_PERCENT = setting.getDouble("max_profit_run_percent");
+    }
     private double level;
     private double buyPrice;
     private int buyNum;
@@ -14,6 +27,9 @@ public class GridModel {
     private double sellPriceSum;
     private double profit;
     private double profitPercentage;
+    private int leftNum;
+    private double leftProfitSellPrice;
+
 
 
     public double getLevel() {
@@ -87,4 +103,61 @@ public class GridModel {
     public void setProfitPercentage(double profitPercentage) {
         this.profitPercentage = profitPercentage;
     }
+
+    public int getLeftNum() {
+        return leftNum;
+    }
+
+    public void setLeftNum(int leftNum) {
+        this.leftNum = leftNum;
+    }
+
+    public double getLeftProfitSellPrice() {
+        return leftProfitSellPrice;
+    }
+
+    public void setLeftProfitSellPrice(double leftProfitSellPrice) {
+        this.leftProfitSellPrice = leftProfitSellPrice;
+    }
+
+    public static GridModel createOneGrid(double buyPrice, double sellPrice, double buyLevel) {
+        GridModel gridModel = new GridModel();
+        gridModel.setLevel(buyLevel);
+        gridModel.setBuyPrice(buyPrice);
+        gridModel.setBuyNum(BUY_NUM);
+        gridModel.setBuyPriceSum(buyPrice * BUY_NUM);
+        gridModel.setSellPrice(sellPrice);
+        int leftNum = calLeftProfitNum(buyPrice, sellPrice);
+        gridModel.setLeftNum(leftNum);
+        gridModel.setSellNum(BUY_NUM - leftNum);
+        gridModel.setSellPriceSum(sellPrice * gridModel.getSellNum());
+        gridModel.setLeftProfitSellPrice(calLeftProfitSellPrice(sellPrice));
+        double finalProfit = leftNum * gridModel.getLeftProfitSellPrice() + sellPrice *
+                gridModel.getSellNum() - buyPrice * BUY_NUM;
+        gridModel.setProfit(finalProfit);
+
+        gridModel.setProfitPercentage(gridModel.getProfit() / gridModel.getBuyPriceSum() * 100);
+        return gridModel;
+    }
+
+    /**
+     * 留利润数量
+     * @param buyPrice
+     * @param sellPrice
+     * @return
+     */
+    private static int calLeftProfitNum(double buyPrice, double sellPrice) {
+        double spread = sellPrice - buyPrice;
+        double profit = spread * BUY_NUM;
+        return (int) (profit / sellPrice);
+    }
+
+    /**
+     * 获取保留利润的出售价格
+     */
+    private static double calLeftProfitSellPrice(double sellPrice) {
+        double leftSellPrice = sellPrice * (100 + MAX_PROFIT_RUN_PERCENT) / 100;
+        return Math.min(leftSellPrice, MAX_PROFIT_RUN_PRICE);
+    }
+
 }
