@@ -1,0 +1,117 @@
+<div class="form">
+  <nz-form-item>
+    <nz-form-label nzSpan="8">品种名称</nz-form-label>
+    <nz-form-control nzSpan="4">
+      <input
+        nz-input
+        [(ngModel)]="name"
+        name="name"
+      >
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="8">当前价格</nz-form-label>
+    <nz-form-control nzSpan="4">
+      <nz-input-number [(ngModel)]="currentPrice"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="8">网格买入封顶价格</nz-form-label>
+    <nz-form-control nzSpan="4">
+      <nz-input-number
+        [(ngModel)]="maxGridPrice"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="8">每格大小</nz-form-label>
+    <nz-form-control nzSpan="4">
+      <nz-input-number
+        [nzFormatter]="formatterPercent"
+        [nzParser]="parserPercent"
+        [(ngModel)]="perGrid"
+      ></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="8">预计自当前价格的最大跌幅（百分比）</nz-form-label>
+    <nz-form-control nzSpan="4">
+      <nz-input-number
+        [nzFormatter]="formatterPercent"
+        [nzParser]="parserPercent"
+        [(ngModel)]="maxLoss"
+      ></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="8">每笔交易股数</nz-form-label>
+    <nz-form-control nzSpan="4">
+      <nz-input-number
+        [(ngModel)]="buyNum"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-divider class="divider" nzText="网格2.0对应开关"></nz-divider>
+  <div class="checkbox">
+    <label nz-checkbox [(ngModel)]="profitRun">利润奔跑</label>
+    <label nz-checkbox [(ngModel)]="weightMore">逐层加码</label>
+    <label nz-checkbox [(ngModel)]="allInOneGo">一网打尽</label>
+  </div>
+  <nz-form-item *ngIf="profitRun">
+    <nz-form-label nzSpan="8">利润奔跑封顶价格</nz-form-label>
+    <nz-form-control nzSpan="4">
+      <nz-input-number [(ngModel)]="maxProfitRunPrice"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item *ngIf="profitRun">
+    <nz-form-label nzSpan="8">
+      利润奔跑封顶涨幅（百分比）
+      <span class="tips" nz-tooltip nzTooltipTitle="价格和涨幅有一个满足条件则停止">
+        <i nz-icon
+           nzType="info-circle" nzTheme="outline"></i>
+      </span>
+    </nz-form-label>
+    <nz-form-control nzSpan="4">
+      <nz-input-number
+        [nzFormatter]="formatterPercent"
+        [nzParser]="parserPercent"
+        [(ngModel)]="maxProfitRunPercent"
+      ></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <button class="button" nz-button nzType="primary" (click)="calc()">点击计算</button>
+  <nz-spin *ngIf="loading" class="spin" nzSimple></nz-spin>
+</div>
+
+<nz-table #basicTable
+          [nzData]="tableData"
+          class="table"
+          [nzShowSizeChanger]="true"
+          [nzPageSize]="50"
+          [nzPageSizeOptions]="[50,100,200]"
+          [nzScroll]="{ y: '600px' }">
+  <thead>
+  <tr>
+    <th>与基准比较</th>
+    <th>买入价格</th>
+    <th>买入数量</th>
+    <th>买入价格合计</th>
+    <th>卖出价格</th>
+    <th>卖出数量</th>
+    <th>卖出价格合计</th>
+    <th>盈利</th>
+    <th>盈利百分比</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let row of basicTable.data">
+    <td>{{ row.level    }}</td>
+    <td>{{ row.buyPrice | number}}</td>
+    <td>{{ row.buyNum | number}}</td>
+    <td>{{ row.buyPriceSum | number}}</td>
+    <td>{{ row.sellPrice | number}}</td>
+    <td>{{ row.sellNum | number}}</td>
+    <td>{{ row.sellPriceSum | number}}</td>
+    <td>{{ row.profit | number}}</td>
+    <td>{{ row.profitPercentage | number}}</td>
+  </tr>
+  </tbody>
+</nz-table>
