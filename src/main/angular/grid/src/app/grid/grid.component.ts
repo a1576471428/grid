@@ -18,6 +18,7 @@ export class GridComponent implements OnInit {
   perGrid = 5;
   maxLoss = 40;
   buyNum = 10000;
+  leftProfitMul = 1;
   loading = false;
   // 利润奔跑
   profitRun = false;
@@ -25,7 +26,8 @@ export class GridComponent implements OnInit {
   weightMore = false;
   // 一网打尽
   allInOneGo = false;
-  tableData:Array<GridModel>=[]
+  tableData: Array<GridModel> = []
+
   constructor(private gridService: GridService) {
   }
 
@@ -40,8 +42,13 @@ export class GridComponent implements OnInit {
       perGrid: this.perGrid,
       maxLoss: this.maxLoss,
       buyNum: this.buyNum,
+      profitRun: this.profitRun,
+      weightMore: this.weightMore,
+      allInOneGo: this.allInOneGo,
+      maxProfitRunPercent: this.maxProfitRunPercent,
+      maxProfitRunPrice: this.maxProfitRunPrice,
+      leftProfitMul: this.leftProfitMul,
     });
-    console.log(grids);
     this.tableData = grids;
     this.loading = false;
   }

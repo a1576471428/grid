@@ -1,5 +1,4 @@
 import {Injectable} from "@angular/core";
-import {GridModule} from "./grid.module";
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +9,13 @@ export class GridService {
   }
 
   public genGrids(gridConfig: GridConfig): Array<GridModel> {
-    const res: Array<GridModel> = [];
+    let res: Array<GridModel> = [];
     res.push(...this.genPricesGtCurrentPrice(gridConfig));
     res.push(...this.genPricesLteCurrentPrice(gridConfig));
     res.sort((o1, o2) => o1.level - o2.level);
+    if (gridConfig.profitRun) {
+      res = res.map(grid => this.profitRun(grid, gridConfig));
+    }
     res.push(this.genSum(res));
     return res;
   }
@@ -53,6 +55,7 @@ export class GridService {
       const sellPrice = gridConfig.currentPrice * gridSellLevel;
       gridModels.push(GridService.createOneGrid(buyPrice, sellPrice, gridBuyLevel, gridConfig));
     }
+    gridModels[0].benchmark = true;
     return gridModels;
   }
 
@@ -70,11 +73,42 @@ export class GridService {
       sellPriceSum: gridModels.map(model => model.sellPriceSum).reduce(((previousValue, currentValue) => previousValue + currentValue)),
       sellNum: gridModels.map(model => model.sellNum).reduce(((previousValue, currentValue) => previousValue + currentValue)),
       profit: gridModels.map(model => model.profit).reduce(((previousValue, currentValue) => previousValue + currentValue)),
+      leftProfitSum: gridModels.map(model => model.leftProfitSum).reduce(((previousValue, currentValue) => previousValue + currentValue)),
     };
     gridModel.profitPercentage = gridModel.profit / gridModel.buyPriceSum * 100;
     return gridModel;
   }
 
+  private profitRun({...grid}: GridModel, gridConfig: GridConfig): GridModel {
+    const leftNum = GridService.calLeftProfitNum(grid.buyPrice, grid.sellPrice, gridConfig);
+    grid.leftNum = leftNum;
+    grid.sellNum = grid.buyNum - leftNum;
+    grid.sellPriceSum = grid.sellPrice * grid.sellNum;
+    grid.leftProfitSellPrice = GridService.calLeftProfitSellPrice(grid.sellPrice, gridConfig);
+    grid.leftProfitSum = grid.leftNum * grid.leftProfitSellPrice;
+    grid.profit = leftNum * grid.leftProfitSellPrice + grid.sellPrice * grid.sellNum - grid.buyPriceSum;
+    grid.profitPercentage = grid.profit / grid.buyPriceSum * 100;
+    return grid;
+  }
+
+  /**
+   * 留利润数量
+   * @return
+   */
+  private static calLeftProfitNum(buyPrice: number, sellPrice: number, gridConfig: GridConfig): number {
+    const spread = sellPrice - buyPrice;
+    const profit = spread * gridConfig.buyNum;
+    return parseInt((profit / sellPrice).toFixed(0), 10) * gridConfig.leftProfitMul;
+  }
+
+  /**
+   * 获取保留利润的出售价格
+   */
+  private static calLeftProfitSellPrice(sellPrice: number, gridConfig: GridConfig): number {
+    console.log(gridConfig)
+    const leftSellPrice = sellPrice * (100 + gridConfig.maxProfitRunPercent) / 100;
+    return Math.min(leftSellPrice, gridConfig.maxProfitRunPrice);
+  }
 
   private static createOneGrid(buyPrice, sellPrice, buyLevel, gridConfig: GridConfig) {
     const gridModel: GridModel = {
@@ -104,6 +138,8 @@ export interface GridModel {
   profitPercentage?: number;
   leftNum?: number;
   leftProfitSellPrice?: number;
+  leftProfitSum?: number;
+  benchmark?: boolean;
 }
 
 export interface GridConfig {
@@ -114,4 +150,13 @@ export interface GridConfig {
   perGrid?: number;
   maxLoss?: number;
   buyNum?: number;
+  leftProfitMul?: number,
+  // 利润奔跑
+  profitRun: boolean;
+  // 逐层加码
+  weightMore: boolean;
+  // 一网打尽
+  allInOneGo: boolean;
+
+  [propName: string]: any;
 }
