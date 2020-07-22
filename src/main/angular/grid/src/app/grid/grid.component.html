@@ -92,7 +92,10 @@
       ></nz-input-number>
     </nz-form-control>
   </nz-form-item>
-  <button class="button" nz-button nzType="primary" (click)="calc()">点击计算</button>
+  <div class="buttons">
+    <button class="button" nz-button nzType="primary" (click)="calc()">点击计算</button>
+    <button class="button" nz-button nzType="primary" (click)="exportToExcel()">导出至exlce</button>
+  </div>
   <nz-spin *ngIf="loading" class="spin" nzSimple></nz-spin>
 </div>
 
