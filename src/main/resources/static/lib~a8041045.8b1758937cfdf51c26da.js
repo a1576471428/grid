@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[54],{JCDJ:function(e,n,t){"use strict";function i(e){return e.getTime()%6e4}function o(e){var n=new Date(e.getTime()),t=Math.ceil(n.getTimezoneOffset());return n.setSeconds(0,0),6e4*t+(t>0?(6e4+i(n))%6e4:i(n))}t.d(n,"a",(function(){return o}))}}]);
