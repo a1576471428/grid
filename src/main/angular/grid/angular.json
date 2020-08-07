@@ -15,8 +15,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
+            "customWebpackConfig": {
+              "path": "./webpack/custom-webpack.js",
+            },
             "outputPath": "../../resources/static",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -46,12 +49,13 @@
                 }
               ],
               "optimization": true,
-              "outputHashing": "all",
+              "outputHashing": "bundles",
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
+              "commonChunk": false,
               "buildOptimizer": true,
               "budgets": [
                 {

@@ -8,4 +8,7 @@
 ### 前端为angular，使用的 NG-ZORRO 组件库。
 由于内容过少，去掉了前后端交互。直接在前端实现了全部逻辑。<br>
 使用时启动springboot的App，输入地址localhost:9000<br>
-或者进入src/angular/grid目录，启动 ng serve
+或者进入src/angular/grid目录，启动 ng serve<br>
+或者访问：http://hard-cent.surge.sh/index.html (访问比较慢，请保持耐心)<br> 
+发布使用的是surge 官网 http://surge.sh <br>
+使用参考： https://cloud.tencent.com/developer/article/1481311
