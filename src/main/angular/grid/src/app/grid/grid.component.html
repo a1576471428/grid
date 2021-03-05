@@ -22,13 +22,13 @@
         [(ngModel)]="maxGridPrice"></nz-input-number>
     </nz-form-control>
   </nz-form-item>
-  <nz-form-item>
+  <nz-form-item *ngIf="!allInOneGo">
     <nz-form-label nzSpan="8">每格大小</nz-form-label>
     <nz-form-control nzSpan="4">
       <nz-input-number
         [nzFormatter]="formatterPercent"
         [nzParser]="parserPercent"
-        [(ngModel)]="perGrid"
+        [(ngModel)]="gridMetas[0].perGrid"
       ></nz-input-number>
     </nz-form-control>
   </nz-form-item>
@@ -111,6 +111,34 @@
       <nz-input-number [(ngModel)]="weightStart"></nz-input-number>
     </nz-form-control>
   </nz-form-item>
+
+  <nz-divider *ngIf="allInOneGo" class="divider" nzText="一网打尽配置"></nz-divider>
+  <nz-form-item *ngIf="allInOneGo">
+    <nz-form-label nzSpan="8">下网数量</nz-form-label>
+    <nz-form-control nzSpan="4">
+      <nz-input-number nzMin="1" [(ngModel)]="gridNum" (ngModelChange)="gridsChange()"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <div *ngIf="allInOneGo" class="all-in-one-go">
+    <nz-space *ngFor="let grid of gridMetas" class="all-in-one-go-item" >
+      <nz-space-item>
+        <nz-form-item>
+          <nz-form-label>网格名称</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="grid.name">
+          </nz-form-control>
+        </nz-form-item>
+      </nz-space-item>
+      <nz-space-item>
+        <nz-form-item>
+          <nz-form-label>网格大小(百分比)</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="grid.perGrid">
+          </nz-form-control>
+        </nz-form-item>
+      </nz-space-item>
+    </nz-space>
+  </div>
   <div class="buttons">
     <button class="button" nz-button nzType="primary" (click)="calc()">点击计算</button>
     <button class="button" nz-button nzType="primary" (click)="exportToExcel()">导出至exlce</button>
@@ -118,43 +146,49 @@
   <nz-spin *ngIf="loading" class="spin" nzSimple></nz-spin>
 </div>
 
-<nz-table #basicTable
-          [nzData]="tableData"
-          class="table"
-          [nzShowSizeChanger]="true"
-          [nzPageSize]="50"
-          [nzPageSizeOptions]="[50,100,200]"
-          [nzScroll]="{ y: '600px' }">
-  <thead>
-  <tr>
-    <th>与基准比较</th>
-    <th>买入价格</th>
-    <th>买入数量</th>
-    <th>买入价格合计</th>
-    <th>卖出价格</th>
-    <th>卖出数量</th>
-    <th>卖出价格合计</th>
-    <th *ngIf="profitRun">本期留存数量</th>
-    <th *ngIf="profitRun">留存卖出价格</th>
-    <th *ngIf="profitRun">本期留存利润</th>
-    <th>盈利</th>
-    <th>盈利百分比</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let row of basicTable.data">
-    <td>{{ row.level    }}</td>
-    <td>{{ row.buyPrice | number}}</td>
-    <td>{{ row.buyNum | number}}</td>
-    <td>{{ row.buyPriceSum | number}}</td>
-    <td>{{ row.sellPrice | number}}</td>
-    <td>{{ row.sellNum | number}}</td>
-    <td>{{ row.sellPriceSum | number}}</td>
-    <td *ngIf="profitRun">{{ row.leftNum | number}}</td>
-    <td *ngIf="profitRun">{{ row.leftProfitSellPrice | number}}</td>
-    <td *ngIf="profitRun">{{ row.leftProfitSum | number }}</td>
-    <td>{{ row.profit | number}}</td>
-    <td>{{ row.profitPercentage | number}}</td>
-  </tr>
-  </tbody>
-</nz-table>
+<nz-tabset class="grid">
+  <nz-tab *ngFor="let grid of grids" [nzTitle]="grid.name">
+
+    <nz-table #basicTable
+              [nzData]="grid.data"
+              class="table"
+              [nzShowSizeChanger]="true"
+              [nzPageSize]="50"
+              [nzPageSizeOptions]="[50,100,200]"
+              [nzScroll]="{ y: '600px' }">
+      <thead>
+      <tr>
+        <th>与基准比较</th>
+        <th>买入价格</th>
+        <th>买入数量</th>
+        <th>买入价格合计</th>
+        <th>卖出价格</th>
+        <th>卖出数量</th>
+        <th>卖出价格合计</th>
+        <th *ngIf="profitRun">本期留存数量</th>
+        <th *ngIf="profitRun">留存卖出价格</th>
+        <th *ngIf="profitRun">本期留存利润</th>
+        <th>盈利</th>
+        <th>盈利百分比</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let row of basicTable.data">
+        <td>{{ row.level    }}</td>
+        <td>{{ row.buyPrice | number}}</td>
+        <td>{{ row.buyNum | number}}</td>
+        <td>{{ row.buyPriceSum | number}}</td>
+        <td>{{ row.sellPrice | number}}</td>
+        <td>{{ row.sellNum | number}}</td>
+        <td>{{ row.sellPriceSum | number}}</td>
+        <td *ngIf="profitRun">{{ row.leftNum | number}}</td>
+        <td *ngIf="profitRun">{{ row.leftProfitSellPrice | number}}</td>
+        <td *ngIf="profitRun">{{ row.leftProfitSum | number }}</td>
+        <td>{{ row.profit | number}}</td>
+        <td>{{ row.profitPercentage | number}}</td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </nz-tab>
+</nz-tabset>
+

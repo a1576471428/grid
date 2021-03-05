@@ -1,6 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {GridModel, GridService} from './grid.service';
 import * as xlsx from 'xlsx';
+import {stream} from 'xlsx';
+import {stringify} from '@angular/compiler/src/util';
 
 @Component({
   templateUrl: './grid.component.html',
@@ -14,7 +16,10 @@ export class GridComponent implements OnInit {
 
   name = '华宝油气';
   currentPrice = 0.455;
-  perGrid = 5;
+  gridMetas: Array<GridMeta> = [{
+    name: '%5网格',
+    perGrid: 5
+  }];
   maxGridPrice = 0.600;
   maxLoss = 40;
   buyAmount = 10000;
@@ -33,7 +38,9 @@ export class GridComponent implements OnInit {
 
   // 一网打尽
   allInOneGo = false;
-  tableData: Array<GridModel> = [];
+  gridNum = 1;
+
+  grids: Array<Grid> = [];
 
   constructor(private gridService: GridService) {
   }
@@ -43,50 +50,59 @@ export class GridComponent implements OnInit {
 
   calc() {
     this.loading = true;
-    const grids = this.gridService.genGrids({
-      currentPrice: this.currentPrice,
-      maxGridPrice: this.maxGridPrice,
-      perGrid: this.perGrid,
-      maxLoss: this.maxLoss,
-      buyAmount: this.buyAmount,
-      profitRun: this.profitRun,
-      weightMore: this.weightMore,
-      weight: this.weight,
-      weightStart: this.weightStart,
-      allInOneGo: this.allInOneGo,
-      maxProfitRunPercent: this.maxProfitRunPercent,
-      maxProfitRunPrice: this.maxProfitRunPrice,
-      leftProfitMul: this.leftProfitMul,
+    this.grids = this.gridMetas.map(gridMeta => {
+      const grid = this.gridService.genGrid({
+        currentPrice: this.currentPrice,
+        maxGridPrice: this.maxGridPrice,
+        perGrid: gridMeta.perGrid,
+        maxLoss: this.maxLoss,
+        buyAmount: this.buyAmount,
+        profitRun: this.profitRun,
+        weightMore: this.weightMore,
+        weight: this.weight,
+        weightStart: this.weightStart,
+        allInOneGo: this.allInOneGo,
+        maxProfitRunPercent: this.maxProfitRunPercent,
+        maxProfitRunPrice: this.maxProfitRunPrice,
+        leftProfitMul: this.leftProfitMul,
+      });
+      return {
+        name: gridMeta.name,
+        data: grid
+      };
     });
-    this.tableData = grids;
+
     this.loading = false;
   }
 
   exportToExcel() {
-    const rowData = this.getExcelRowData();
-    const ws: xlsx.WorkSheet =
-      xlsx.utils.json_to_sheet(rowData);
-    // 数字格式化 参见https://github.com/rockboom/SheetJS-docs-zh-CN中 默认的数字格式 部分
-    Object.keys(ws).forEach(key => {
-      // 非标题行才设置数字格式化
-      if (!/^[A-Z]+1$|^!.*$/.test(key)) {
-        ws[key].z = '0.00';
-      }
-    });
-    // 每列指定宽度
-    const col = {width: 20};
-    const allCols = [];
-    for (let i = 0; i < Object.keys(rowData[0]).length; i++) {
-      allCols.push(col);
-    }
-    ws['!cols'] = allCols;
     const wb: xlsx.WorkBook = xlsx.utils.book_new();
-    xlsx.utils.book_append_sheet(wb, ws, this.name);
+    this.grids.forEach(grid => {
+      const rowData = this.getExcelRowData(grid.data);
+      const ws: xlsx.WorkSheet =
+        xlsx.utils.json_to_sheet(rowData);
+      // 数字格式化 参见https://github.com/rockboom/SheetJS-docs-zh-CN中 默认的数字格式 部分
+      Object.keys(ws).forEach(key => {
+        // 非标题行才设置数字格式化
+        if (!/^[A-Z]+1$|^!.*$/.test(key)) {
+          ws[key].z = '0.00';
+        }
+      });
+      // 每列指定宽度
+      const col = {width: 20};
+      const allCols = [];
+      for (let i = 0; i < Object.keys(rowData[0]).length; i++) {
+        allCols.push(col);
+      }
+      ws['!cols'] = allCols;
+      xlsx.utils.book_append_sheet(wb, ws, grid.name);
+    });
+
     xlsx.writeFile(wb, `${this.name}.xlsx`);
   }
 
-  getExcelRowData(): any {
-    return this.tableData.map(value => {
+  getExcelRowData(data: Array<GridModel>): any {
+    return data.map(value => {
       const res: any = {};
       res['与基准比较'] = value.level;
       res['买入价格'] = value.buyPrice;
@@ -104,7 +120,33 @@ export class GridComponent implements OnInit {
       res['盈利百分比'] = value.profitPercentage;
       return res;
     });
-
-
   }
+
+  gridsChange() {
+    if (this.gridNum > this.gridMetas.length) {
+      const addNum = this.gridNum - this.gridMetas.length;
+      for (let i = 0; i < addNum; i++) {
+        this.gridMetas.push(this.genOneGridMeta(this.gridMetas.length + 1));
+      }
+    } else if (this.gridNum < this.gridMetas.length) {
+      this.gridMetas = this.gridMetas.splice(0, this.gridNum);
+    }
+  }
+
+  genOneGridMeta(index: number): GridMeta {
+    return {
+      name: `网格${index}`,
+      perGrid: 5
+    };
+  }
+}
+
+interface Grid {
+  name: string;
+  data: Array<GridModel>;
+}
+
+interface GridMeta {
+  name: string;
+  perGrid: number;
 }

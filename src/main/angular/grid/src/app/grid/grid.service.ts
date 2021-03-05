@@ -8,7 +8,7 @@ export class GridService {
   constructor() {
   }
 
-  public genGrids(gridConfig: GridConfig): Array<GridModel> {
+  public genGrid(gridConfig: GridConfig): Array<GridModel> {
     let res: Array<GridModel> = [];
     // res.push(...this.genPricesGtCurrentPrice(gridConfig));
     res.push(...this.genPricesLteCurrentPrice(gridConfig));
@@ -18,26 +18,6 @@ export class GridService {
     }
     res.push(this.genSum(res));
     return res;
-  }
-
-  /**
-   * 生成大于当前价格的网格
-   *
-   * @return
-   */
-  private genPricesGtCurrentPrice(gridConfig: GridConfig): Array<GridModel> {
-    const gridModels: Array<GridModel> = [];
-    let nextBuyPrice;
-    let level = 1;
-    do {
-      const gridBuyLevel = 1.0 + gridConfig.perGrid * level / 100;
-      const gridSellLevel = 1.0 + gridConfig.perGrid * (level + 1) / 100;
-      nextBuyPrice = gridConfig.currentPrice * gridBuyLevel;
-      const nextSellPrice = gridConfig.currentPrice * gridSellLevel;
-      level++;
-      gridModels.push(this.createOneGrid(nextBuyPrice, nextSellPrice, gridBuyLevel, gridConfig));
-    } while (nextBuyPrice < gridConfig.maxGridPrice);
-    return gridModels;
   }
 
   /**

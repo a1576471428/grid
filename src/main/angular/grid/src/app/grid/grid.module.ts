@@ -6,12 +6,13 @@ import {
   NzIconModule,
   NzInputModule,
   NzInputNumberModule, NzSpinModule,
-  NzTableModule,
+  NzTableModule, NzTabsModule,
   NzToolTipModule
-} from "ng-zorro-antd";
+} from 'ng-zorro-antd';
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {GridService} from "./grid.service";
+import {NzSpaceModule} from 'ng-zorro-antd/space';
 
 const COMPONENTS = [GridComponent]
 
@@ -29,6 +30,8 @@ const COMPONENTS = [GridComponent]
     CommonModule,
     NzCheckboxModule,
     NzDividerModule,
+    NzTabsModule,
+    NzSpaceModule,
   ],
   declarations: [...COMPONENTS]
 })
