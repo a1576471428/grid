@@ -43,10 +43,10 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label nzSpan="8">每笔交易股数</nz-form-label>
+    <nz-form-label nzSpan="8">每笔交易金额</nz-form-label>
     <nz-form-control nzSpan="4">
       <nz-input-number
-        [(ngModel)]="buyNum"></nz-input-number>
+        [(ngModel)]="buyAmount"></nz-input-number>
     </nz-form-control>
   </nz-form-item>
   <nz-divider class="divider" nzText="网格2.0对应开关"></nz-divider>
@@ -55,12 +55,15 @@
     <label nz-checkbox [(ngModel)]="weightMore">逐层加码</label>
     <label nz-checkbox [(ngModel)]="allInOneGo">一网打尽</label>
   </div>
+
+  <nz-divider *ngIf="profitRun" class="divider" nzText="利润奔跑配置"></nz-divider>
   <nz-form-item *ngIf="profitRun">
     <nz-form-label nzSpan="8">利润奔跑封顶价格</nz-form-label>
     <nz-form-control nzSpan="4">
       <nz-input-number [(ngModel)]="maxProfitRunPrice"></nz-input-number>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item *ngIf="profitRun">
     <nz-form-label nzSpan="8">
       利润奔跑封顶涨幅（百分比）
@@ -92,6 +95,22 @@
       ></nz-input-number>
     </nz-form-control>
   </nz-form-item>
+
+  <nz-divider *ngIf="weightMore" class="divider" nzText="逐层加码配置"></nz-divider>
+  <nz-form-item *ngIf="weightMore">
+    <nz-form-label nzSpan="8">每格加码数</nz-form-label>
+    <nz-form-control nzSpan="4">
+      <nz-input-number [(ngModel)]="weight"></nz-input-number>
+    </nz-form-control>
+
+  </nz-form-item>
+
+  <nz-form-item *ngIf="weightMore">
+    <nz-form-label nzSpan="8">起始加码格</nz-form-label>
+    <nz-form-control nzSpan="4">
+      <nz-input-number [(ngModel)]="weightStart"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
   <div class="buttons">
     <button class="button" nz-button nzType="primary" (click)="calc()">点击计算</button>
     <button class="button" nz-button nzType="primary" (click)="exportToExcel()">导出至exlce</button>
@@ -119,14 +138,11 @@
     <th *ngIf="profitRun">留存卖出价格</th>
     <th *ngIf="profitRun">本期留存利润</th>
     <th>盈利</th>
-    <th>盈利百分比<span class="tips" nz-tooltip nzTooltipTitle="该百分比是相对本期买入价格来说的">
-        <i nz-icon
-           nzType="info-circle" nzTheme="outline"></i>
-      </span></th>
+    <th>盈利百分比</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let row of basicTable.data" >
+  <tr *ngFor="let row of basicTable.data">
     <td>{{ row.level    }}</td>
     <td>{{ row.buyPrice | number}}</td>
     <td>{{ row.buyNum | number}}</td>

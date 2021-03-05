@@ -1,5 +1,5 @@
-import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
-import {GridModel, GridService} from "./grid.service";
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {GridModel, GridService} from './grid.service';
 import * as xlsx from 'xlsx';
 
 @Component({
@@ -14,21 +14,26 @@ export class GridComponent implements OnInit {
 
   name = '华宝油气';
   currentPrice = 0.455;
-  maxProfitRunPrice = 0.700;
-  maxProfitRunPercent = 40;
-  maxGridPrice = 0.600;
   perGrid = 5;
+  maxGridPrice = 0.600;
   maxLoss = 40;
-  buyNum = 10000;
-  leftProfitMul = 1;
+  buyAmount = 10000;
   loading = false;
+
   // 利润奔跑
   profitRun = false;
+  maxProfitRunPrice = 0.700;
+  maxProfitRunPercent = 40;
+  leftProfitMul = 1;
+
   // 逐层加码
   weightMore = false;
+  weight = 5;
+  weightStart = 2;
+
   // 一网打尽
   allInOneGo = false;
-  tableData: Array<GridModel> = []
+  tableData: Array<GridModel> = [];
 
   constructor(private gridService: GridService) {
   }
@@ -43,9 +48,11 @@ export class GridComponent implements OnInit {
       maxGridPrice: this.maxGridPrice,
       perGrid: this.perGrid,
       maxLoss: this.maxLoss,
-      buyNum: this.buyNum,
+      buyAmount: this.buyAmount,
       profitRun: this.profitRun,
       weightMore: this.weightMore,
+      weight: this.weight,
+      weightStart: this.weightStart,
       allInOneGo: this.allInOneGo,
       maxProfitRunPercent: this.maxProfitRunPercent,
       maxProfitRunPrice: this.maxProfitRunPrice,
@@ -60,9 +67,9 @@ export class GridComponent implements OnInit {
     const ws: xlsx.WorkSheet =
       xlsx.utils.json_to_sheet(rowData);
     // 数字格式化 参见https://github.com/rockboom/SheetJS-docs-zh-CN中 默认的数字格式 部分
-    Object.keys(ws).forEach(key=>{
+    Object.keys(ws).forEach(key => {
       // 非标题行才设置数字格式化
-      if (!/^[A-Z]+1$|^!.*$/.test(key)){
+      if (!/^[A-Z]+1$|^!.*$/.test(key)) {
         ws[key].z = '0.00';
       }
     });
@@ -79,8 +86,8 @@ export class GridComponent implements OnInit {
   }
 
   getExcelRowData(): any {
-    return this.tableData.map(value=>{
-      const res :any = {};
+    return this.tableData.map(value => {
+      const res: any = {};
       res['与基准比较'] = value.level;
       res['买入价格'] = value.buyPrice;
       res['买入数量'] = value.buyNum;
@@ -88,7 +95,7 @@ export class GridComponent implements OnInit {
       res['卖出价格'] = value.sellPrice;
       res['卖出数量'] = value.sellNum;
       res['卖出价格合计'] = value.sellPriceSum;
-      if (this.profitRun){
+      if (this.profitRun) {
         res['本期留存数量'] = value.leftNum;
         res['留存卖出价格'] = value.leftProfitSellPrice;
         res['本期留存利润'] = value.leftProfitSum;
@@ -96,7 +103,7 @@ export class GridComponent implements OnInit {
       res['盈利'] = value.profit;
       res['盈利百分比'] = value.profitPercentage;
       return res;
-    })
+    });
 
 
   }
