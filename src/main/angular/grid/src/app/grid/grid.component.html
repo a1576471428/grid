@@ -98,9 +98,12 @@
 
   <nz-divider *ngIf="weightMore" class="divider" nzText="逐层加码配置"></nz-divider>
   <nz-form-item *ngIf="weightMore">
-    <nz-form-label nzSpan="8">每格加码数</nz-form-label>
+    <nz-form-label nzSpan="8">每格加码数(百分比)</nz-form-label>
     <nz-form-control nzSpan="4">
-      <nz-input-number [(ngModel)]="weight"></nz-input-number>
+      <nz-input-number [(ngModel)]="weight"
+                       [nzFormatter]="formatterPercent"
+                       [nzParser]="parserPercent"
+      ></nz-input-number>
     </nz-form-control>
 
   </nz-form-item>
@@ -108,7 +111,7 @@
   <nz-form-item *ngIf="weightMore">
     <nz-form-label nzSpan="8">起始加码格</nz-form-label>
     <nz-form-control nzSpan="4">
-      <nz-input-number [(ngModel)]="weightStart"></nz-input-number>
+      <nz-input-number [(ngModel)]="weightStart" nzMin="1"></nz-input-number>
     </nz-form-control>
   </nz-form-item>
 
@@ -133,7 +136,10 @@
         <nz-form-item>
           <nz-form-label>网格大小(百分比)</nz-form-label>
           <nz-form-control>
-            <input nz-input [(ngModel)]="grid.perGrid">
+            <nz-input-number [(ngModel)]="grid.perGrid" nzMin="1"
+                             [nzFormatter]="formatterPercent"
+                             [nzParser]="parserPercent"
+            ></nz-input-number>
           </nz-form-control>
         </nz-form-item>
       </nz-space-item>

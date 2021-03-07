@@ -151,7 +151,7 @@ Object(_angular_common__WEBPACK_IMPORTED_MODULE_8__["registerLocaleData"])(_angu
 class AppModule {
 }
 AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]] });
-AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [{ provide: ng_zorro_antd_i18n__WEBPACK_IMPORTED_MODULE_7__["NZ_I18N"], useValue: ng_zorro_antd_i18n__WEBPACK_IMPORTED_MODULE_7__["zh_CN"] }], imports: [[
+AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [{ provide: ng_zorro_antd_i18n__WEBPACK_IMPORTED_MODULE_7__["NZ_I18N"], useValue: ng_zorro_antd_i18n__WEBPACK_IMPORTED_MODULE_7__["zh_CN"] }, { provide: _angular_common__WEBPACK_IMPORTED_MODULE_8__["LocationStrategy"], useClass: _angular_common__WEBPACK_IMPORTED_MODULE_8__["HashLocationStrategy"] }], imports: [[
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
             _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
@@ -185,7 +185,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
                     ng_zorro_antd__WEBPACK_IMPORTED_MODULE_11__["NzLayoutModule"],
                     ng_zorro_antd__WEBPACK_IMPORTED_MODULE_11__["NzPageHeaderModule"],
                 ],
-                providers: [{ provide: ng_zorro_antd_i18n__WEBPACK_IMPORTED_MODULE_7__["NZ_I18N"], useValue: ng_zorro_antd_i18n__WEBPACK_IMPORTED_MODULE_7__["zh_CN"] }],
+                providers: [{ provide: ng_zorro_antd_i18n__WEBPACK_IMPORTED_MODULE_7__["NZ_I18N"], useValue: ng_zorro_antd_i18n__WEBPACK_IMPORTED_MODULE_7__["zh_CN"] }, { provide: _angular_common__WEBPACK_IMPORTED_MODULE_8__["LocationStrategy"], useClass: _angular_common__WEBPACK_IMPORTED_MODULE_8__["HashLocationStrategy"] }],
                 bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]],
             }]
     }], null, null); })();
@@ -310,10 +310,10 @@ function GridComponent_nz_form_item_40_Template(rf, ctx) { if (rf & 1) {
     const _r22 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "nz-form-item");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "nz-form-label", 1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "\u6BCF\u683C\u52A0\u7801\u6570");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "\u6BCF\u683C\u52A0\u7801\u6570(\u767E\u5206\u6BD4)");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "nz-form-control", 2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "nz-input-number", 4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "nz-input-number", 25);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function GridComponent_nz_form_item_40_Template_nz_input_number_ngModelChange_4_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r22); const ctx_r21 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r21.weight = $event; });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -321,7 +321,7 @@ function GridComponent_nz_form_item_40_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r6.weight);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r6.weight)("nzFormatter", ctx_r6.formatterPercent)("nzParser", ctx_r6.parserPercent);
 } }
 function GridComponent_nz_form_item_41_Template(rf, ctx) { if (rf & 1) {
     const _r24 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
@@ -330,7 +330,7 @@ function GridComponent_nz_form_item_41_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "\u8D77\u59CB\u52A0\u7801\u683C");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "nz-form-control", 2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "nz-input-number", 4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "nz-input-number", 26);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function GridComponent_nz_form_item_41_Template_nz_input_number_ngModelChange_4_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r24); const ctx_r23 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r23.weightStart = $event; });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -341,7 +341,7 @@ function GridComponent_nz_form_item_41_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r7.weightStart);
 } }
 function GridComponent_nz_divider_42_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "nz-divider", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "nz-divider", 27);
 } }
 function GridComponent_nz_form_item_43_Template(rf, ctx) { if (rf & 1) {
     const _r26 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
@@ -362,14 +362,14 @@ function GridComponent_nz_form_item_43_Template(rf, ctx) { if (rf & 1) {
 } }
 function GridComponent_div_44_nz_space_1_Template(rf, ctx) { if (rf & 1) {
     const _r31 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "nz-space", 29);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "nz-space", 30);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "nz-space-item");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "nz-form-item");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "nz-form-label");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "\u7F51\u683C\u540D\u79F0");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "nz-form-control");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "input", 30);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "input", 31);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function GridComponent_div_44_nz_space_1_Template_input_ngModelChange_6_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31); const grid_r29 = ctx.$implicit; return grid_r29.name = $event; });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -381,8 +381,8 @@ function GridComponent_div_44_nz_space_1_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, "\u7F51\u683C\u5927\u5C0F(\u767E\u5206\u6BD4)");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "nz-form-control");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "input", 30);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function GridComponent_div_44_nz_space_1_Template_input_ngModelChange_12_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31); const grid_r29 = ctx.$implicit; return grid_r29.perGrid = $event; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "nz-input-number", 32);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function GridComponent_div_44_nz_space_1_Template_nz_input_number_ngModelChange_12_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31); const grid_r29 = ctx.$implicit; return grid_r29.perGrid = $event; });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -390,14 +390,15 @@ function GridComponent_div_44_nz_space_1_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const grid_r29 = ctx.$implicit;
+    const ctx_r28 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", grid_r29.name);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", grid_r29.perGrid);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", grid_r29.perGrid)("nzFormatter", ctx_r28.formatterPercent)("nzParser", ctx_r28.parserPercent);
 } }
 function GridComponent_div_44_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 27);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, GridComponent_div_44_nz_space_1_Template, 13, 2, "nz-space", 28);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 28);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, GridComponent_div_44_nz_space_1_Template, 13, 4, "nz-space", 29);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
@@ -405,7 +406,7 @@ function GridComponent_div_44_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r10.gridMetas);
 } }
 function GridComponent_nz_spin_50_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "nz-spin", 31);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "nz-spin", 33);
 } }
 function GridComponent_nz_tab_52_th_19_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th");
@@ -524,8 +525,8 @@ function GridComponent_nz_tab_52_tr_27_Template(rf, ctx) { if (rf & 1) {
 const _c1 = function () { return [50, 100, 200]; };
 const _c2 = function () { return { y: "600px" }; };
 function GridComponent_nz_tab_52_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "nz-tab", 32);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "nz-table", 33, 34);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "nz-tab", 34);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "nz-table", 35, 36);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "thead");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "tr");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "th");
@@ -561,7 +562,7 @@ function GridComponent_nz_tab_52_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](26, "tbody");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](27, GridComponent_nz_tab_52_tr_27_Template, 30, 28, "tr", 35);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](27, GridComponent_nz_tab_52_tr_27_Template, 30, 28, "tr", 37);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -704,7 +705,7 @@ GridComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
     } if (rf & 2) {
         var _t;
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.basicTable = _t.first);
-    } }, decls: 53, vars: 23, consts: [[1, "form"], ["nzSpan", "8"], ["nzSpan", "4"], ["nz-input", "", "name", "name", 3, "ngModel", "ngModelChange"], [3, "ngModel", "ngModelChange"], [4, "ngIf"], [3, "nzFormatter", "nzParser", "ngModel", "ngModelChange"], ["nzText", "\u7F51\u683C2.0\u5BF9\u5E94\u5F00\u5173", 1, "divider"], [1, "checkbox"], ["nz-checkbox", "", 3, "ngModel", "ngModelChange"], ["class", "divider", "nzText", "\u5229\u6DA6\u5954\u8DD1\u914D\u7F6E", 4, "ngIf"], ["class", "divider", "nzText", "\u9010\u5C42\u52A0\u7801\u914D\u7F6E", 4, "ngIf"], ["class", "divider", "nzText", "\u4E00\u7F51\u6253\u5C3D\u914D\u7F6E", 4, "ngIf"], ["class", "all-in-one-go", 4, "ngIf"], [1, "buttons"], ["nz-button", "", "nzType", "primary", 1, "button", 3, "click"], ["class", "spin", "nzSimple", "", 4, "ngIf"], [1, "grid"], [3, "nzTitle", 4, "ngFor", "ngForOf"], ["nzText", "\u5229\u6DA6\u5954\u8DD1\u914D\u7F6E", 1, "divider"], ["nz-tooltip", "", "nzTooltipTitle", "\u4EF7\u683C\u548C\u6DA8\u5E45\u6709\u4E00\u4E2A\u6EE1\u8DB3\u6761\u4EF6\u5219\u505C\u6B62", 1, "tips"], ["nz-icon", "", "nzType", "info-circle", "nzTheme", "outline"], ["nz-tooltip", "", "nzTooltipTitle", "\u7559\u5B58\u591A\u4EFD\u5229\u6DA6\u65F6\u586B\u5199\uFF0C\u4E0D\u5199\u9ED8\u8BA4\u4E3A1", 1, "tips"], [3, "ngModel", "nzMin", "ngModelChange"], ["nzText", "\u9010\u5C42\u52A0\u7801\u914D\u7F6E", 1, "divider"], ["nzText", "\u4E00\u7F51\u6253\u5C3D\u914D\u7F6E", 1, "divider"], ["nzMin", "1", 3, "ngModel", "ngModelChange"], [1, "all-in-one-go"], ["class", "all-in-one-go-item", 4, "ngFor", "ngForOf"], [1, "all-in-one-go-item"], ["nz-input", "", 3, "ngModel", "ngModelChange"], ["nzSimple", "", 1, "spin"], [3, "nzTitle"], [1, "table", 3, "nzData", "nzShowSizeChanger", "nzPageSize", "nzPageSizeOptions", "nzScroll"], ["basicTable", ""], [4, "ngFor", "ngForOf"]], template: function GridComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, decls: 53, vars: 23, consts: [[1, "form"], ["nzSpan", "8"], ["nzSpan", "4"], ["nz-input", "", "name", "name", 3, "ngModel", "ngModelChange"], [3, "ngModel", "ngModelChange"], [4, "ngIf"], [3, "nzFormatter", "nzParser", "ngModel", "ngModelChange"], ["nzText", "\u7F51\u683C2.0\u5BF9\u5E94\u5F00\u5173", 1, "divider"], [1, "checkbox"], ["nz-checkbox", "", 3, "ngModel", "ngModelChange"], ["class", "divider", "nzText", "\u5229\u6DA6\u5954\u8DD1\u914D\u7F6E", 4, "ngIf"], ["class", "divider", "nzText", "\u9010\u5C42\u52A0\u7801\u914D\u7F6E", 4, "ngIf"], ["class", "divider", "nzText", "\u4E00\u7F51\u6253\u5C3D\u914D\u7F6E", 4, "ngIf"], ["class", "all-in-one-go", 4, "ngIf"], [1, "buttons"], ["nz-button", "", "nzType", "primary", 1, "button", 3, "click"], ["class", "spin", "nzSimple", "", 4, "ngIf"], [1, "grid"], [3, "nzTitle", 4, "ngFor", "ngForOf"], ["nzText", "\u5229\u6DA6\u5954\u8DD1\u914D\u7F6E", 1, "divider"], ["nz-tooltip", "", "nzTooltipTitle", "\u4EF7\u683C\u548C\u6DA8\u5E45\u6709\u4E00\u4E2A\u6EE1\u8DB3\u6761\u4EF6\u5219\u505C\u6B62", 1, "tips"], ["nz-icon", "", "nzType", "info-circle", "nzTheme", "outline"], ["nz-tooltip", "", "nzTooltipTitle", "\u7559\u5B58\u591A\u4EFD\u5229\u6DA6\u65F6\u586B\u5199\uFF0C\u4E0D\u5199\u9ED8\u8BA4\u4E3A1", 1, "tips"], [3, "ngModel", "nzMin", "ngModelChange"], ["nzText", "\u9010\u5C42\u52A0\u7801\u914D\u7F6E", 1, "divider"], [3, "ngModel", "nzFormatter", "nzParser", "ngModelChange"], ["nzMin", "1", 3, "ngModel", "ngModelChange"], ["nzText", "\u4E00\u7F51\u6253\u5C3D\u914D\u7F6E", 1, "divider"], [1, "all-in-one-go"], ["class", "all-in-one-go-item", 4, "ngFor", "ngForOf"], [1, "all-in-one-go-item"], ["nz-input", "", 3, "ngModel", "ngModelChange"], ["nzMin", "1", 3, "ngModel", "nzFormatter", "nzParser", "ngModelChange"], ["nzSimple", "", 1, "spin"], [3, "nzTitle"], [1, "table", 3, "nzData", "nzShowSizeChanger", "nzPageSize", "nzPageSizeOptions", "nzScroll"], ["basicTable", ""], [4, "ngFor", "ngForOf"]], template: function GridComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "nz-form-item");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "nz-form-label", 1);
@@ -777,7 +778,7 @@ GridComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](37, GridComponent_nz_form_item_37_Template, 7, 3, "nz-form-item", 5);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](38, GridComponent_nz_form_item_38_Template, 7, 2, "nz-form-item", 5);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](39, GridComponent_nz_divider_39_Template, 1, 0, "nz-divider", 11);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](40, GridComponent_nz_form_item_40_Template, 5, 1, "nz-form-item", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](40, GridComponent_nz_form_item_40_Template, 5, 3, "nz-form-item", 5);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](41, GridComponent_nz_form_item_41_Template, 5, 1, "nz-form-item", 5);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](42, GridComponent_nz_divider_42_Template, 1, 0, "nz-divider", 12);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](43, GridComponent_nz_form_item_43_Template, 5, 1, "nz-form-item", 5);
@@ -1052,7 +1053,7 @@ class GridService {
     genBuyNum(buyLevel, buyPrice, gridConfig) {
         let buyNum = Math.floor(gridConfig.buyAmount / buyPrice);
         if (gridConfig.weightMore) {
-            const currentLevel = Math.floor((1 - buyLevel) * 100 / gridConfig.perGrid);
+            const currentLevel = Math.floor((100 - buyLevel * 100) / gridConfig.perGrid);
             if (currentLevel >= gridConfig.weightStart) {
                 const extraBuyNum = Math.floor(buyNum * (currentLevel - gridConfig.weightStart + 1) * gridConfig.weight / 100);
                 buyNum += extraBuyNum;

@@ -90,7 +90,7 @@ export class GridService {
     return Math.min(leftSellPrice, gridConfig.maxProfitRunPrice);
   }
 
-  private createOneGrid(buyPrice: number, sellPrice, buyLevel, gridConfig: GridConfig) {
+  private createOneGrid(buyPrice: number, sellPrice, buyLevel, gridConfig: GridConfig) : GridModel{
     const buyNum: number = this.genBuyNum(buyLevel, buyPrice, gridConfig);
     const gridModel: GridModel = {
       level: buyLevel,
@@ -109,7 +109,7 @@ export class GridService {
   private genBuyNum(buyLevel: number, buyPrice: number, gridConfig: GridConfig): number {
     let buyNum: number = Math.floor(gridConfig.buyAmount / buyPrice);
     if (gridConfig.weightMore) {
-      const currentLevel = Math.floor((1 - buyLevel) * 100 / gridConfig.perGrid);
+      const currentLevel = Math.floor((100 - buyLevel * 100) / gridConfig.perGrid);
       if (currentLevel >= gridConfig.weightStart) {
         const extraBuyNum = Math.floor(buyNum * (currentLevel - gridConfig.weightStart + 1) * gridConfig.weight / 100);
         buyNum += extraBuyNum;
