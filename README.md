@@ -15,4 +15,4 @@ e大网格交易的完整版本，交易使用类型，详细操作等可以在�
 
 ## release
 
-release已发布，下载后解压即可得到exe，双击就可以使用了。
+(release)[https://github.com/a1576471428/grid/releases/tag/1.0.0] 已发布，下载后解压即可得到exe，双击就可以使用了。
