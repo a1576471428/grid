@@ -12,3 +12,7 @@ e大网格交易的完整版本，交易使用类型，详细操作等可以在�
 使用时启动springboot的App，输入地址localhost:9000<br>
 或者进入src/angular/grid目录，启动 ng serve<br>
 或者访问：https://a1576471428.github.io/grid/index.html
+
+## release
+
+release已发布，下载后解压即可得到exe，双击就可以使用了。
