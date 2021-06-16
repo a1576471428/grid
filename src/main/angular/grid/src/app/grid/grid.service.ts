@@ -78,19 +78,18 @@ export class GridService {
   private calLeftProfitNum(buyPrice: number, sellPrice: number, gridConfig: GridConfig, buyNum: number): number {
     const spread = sellPrice - buyPrice;
     const profit = spread * buyNum;
-    return parseInt((profit / sellPrice).toFixed(0), 10) * gridConfig.leftProfitMul;
+    const shouldLeftNum = parseInt((profit / sellPrice).toFixed(0), 10) * gridConfig.leftProfitMul;
+    return this.calForChs(shouldLeftNum);
   }
 
   /**
    * 获取保留利润的出售价格
    */
   private calLeftProfitSellPrice(sellPrice: number, gridConfig: GridConfig): number {
-    console.log(gridConfig);
-    const leftSellPrice = sellPrice * (100 + gridConfig.maxProfitRunPercent) / 100;
-    return Math.min(leftSellPrice, gridConfig.maxProfitRunPrice);
+    return gridConfig.currentPrice * (100 + gridConfig.maxProfitRunPercent) / 100;
   }
 
-  private createOneGrid(buyPrice: number, sellPrice, buyLevel, gridConfig: GridConfig) : GridModel{
+  private createOneGrid(buyPrice: number, sellPrice, buyLevel, gridConfig: GridConfig): GridModel {
     const buyNum: number = this.genBuyNum(buyLevel, buyPrice, gridConfig);
     const gridModel: GridModel = {
       level: buyLevel,
@@ -115,7 +114,12 @@ export class GridService {
         buyNum += extraBuyNum;
       }
     }
-    return buyNum;
+    return this.calForChs(buyNum);
+  }
+
+  // A股购买数量需要是100的整数，这里做了向下取整
+  private calForChs(num: number): number {
+    return parseInt(String(num / 100), 10) * 100;
   }
 }
 

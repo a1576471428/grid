@@ -27,14 +27,13 @@ export class GridComponent implements OnInit {
 
   // 利润奔跑
   profitRun = false;
-  maxProfitRunPrice = 0.700;
   maxProfitRunPercent = 40;
   leftProfitMul = 1;
 
   // 逐层加码
   weightMore = false;
   weight = 5;
-  weightStart = 2;
+  weightStart = 1;
 
   // 一网打尽
   allInOneGo = false;
@@ -63,7 +62,6 @@ export class GridComponent implements OnInit {
         weightStart: this.weightStart,
         allInOneGo: this.allInOneGo,
         maxProfitRunPercent: this.maxProfitRunPercent,
-        maxProfitRunPrice: this.maxProfitRunPrice,
         leftProfitMul: this.leftProfitMul,
       });
       return {

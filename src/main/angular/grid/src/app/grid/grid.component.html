@@ -60,17 +60,13 @@
   <nz-form-item *ngIf="profitRun">
     <nz-form-label nzSpan="8">利润奔跑封顶价格</nz-form-label>
     <nz-form-control nzSpan="4">
-      <nz-input-number [(ngModel)]="maxProfitRunPrice"></nz-input-number>
+      <nz-input-number [(ngModel)]="(maxProfitRunPercent / 100 + 1) * currentPrice" [disabled]="true"></nz-input-number>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item *ngIf="profitRun">
     <nz-form-label nzSpan="8">
       利润奔跑封顶涨幅（百分比）
-      <span class="tips" nz-tooltip nzTooltipTitle="价格和涨幅有一个满足条件则停止">
-        <i nz-icon
-           nzType="info-circle" nzTheme="outline"></i>
-      </span>
     </nz-form-label>
     <nz-form-control nzSpan="4">
       <nz-input-number
